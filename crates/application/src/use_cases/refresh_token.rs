@@ -1,5 +1,5 @@
 use uuid::Uuid;
-use valdraegorn_domain::errors::DomainResult;
+use valdhran_domain::errors::DomainResult;
 use crate::use_cases::authenticate_user::TokenService;
 
 pub struct RefreshTokenInput {

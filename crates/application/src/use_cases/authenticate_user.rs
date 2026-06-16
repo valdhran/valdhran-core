@@ -1,5 +1,5 @@
 use uuid::Uuid;
-use valdraegorn_domain::{
+use valdhran_domain::{
     errors::{DomainError, DomainResult},
     repositories::user_repository::UserRepository,
     value_objects::email::Email,

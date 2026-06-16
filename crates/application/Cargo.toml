@@ -1,10 +1,10 @@
 [package]
-name = "valdraegorn-application"
+name = "valdhran-application"
 version.workspace = true
 edition.workspace = true
 
 [dependencies]
-valdraegorn-domain = { path = "../domain" }
+valdhran-domain = { path = "../domain" }
 serde = { workspace = true }
 uuid = { workspace = true }
 chrono = { workspace = true }

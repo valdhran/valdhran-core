@@ -1,11 +1,11 @@
 [package]
-name = "valdraegorn-infrastructure"
+name = "valdhran-infrastructure"
 version.workspace = true
 edition.workspace = true
 
 [dependencies]
-valdraegorn-domain = { path = "../domain" }
-valdraegorn-application = { path = "../application" }
+valdhran-domain = { path = "../domain" }
+valdhran-application = { path = "../application" }
 sqlx = { workspace = true }
 tokio = { workspace = true }
 axum = { workspace = true }

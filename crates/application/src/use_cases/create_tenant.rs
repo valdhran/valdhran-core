@@ -1,5 +1,5 @@
 use uuid::Uuid;
-use valdraegorn_domain::{
+use valdhran_domain::{
     entities::tenant::Tenant,
     errors::{DomainError, DomainResult},
     repositories::tenant_repository::TenantRepository,
