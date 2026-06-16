@@ -1,0 +1,22 @@
+[package]
+name = "valdraegorn-infrastructure"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+valdraegorn-domain = { path = "../domain" }
+valdraegorn-application = { path = "../application" }
+sqlx = { workspace = true }
+tokio = { workspace = true }
+axum = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+uuid = { workspace = true }
+chrono = { workspace = true }
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+tracing = { workspace = true }
+jsonwebtoken = { workspace = true }
+argon2 = { workspace = true }
+config = { workspace = true }
+dotenvy = { workspace = true }

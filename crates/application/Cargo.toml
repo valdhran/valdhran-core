@@ -1,0 +1,13 @@
+[package]
+name = "valdraegorn-application"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+valdraegorn-domain = { path = "../domain" }
+serde = { workspace = true }
+uuid = { workspace = true }
+chrono = { workspace = true }
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+tokio = { workspace = true }
