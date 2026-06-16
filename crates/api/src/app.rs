@@ -16,7 +16,7 @@ use valdhran_infrastructure::{
     },
     config::app_config::AppConfig,
 };
-use crate::handlers::{auth, tenants};
+use crate::handlers::{auth, tenants, users};
 
 #[derive(Clone)]
 pub struct AppState {
@@ -34,6 +34,7 @@ pub fn create_router(state: AppState) -> Router {
         .route("/auth/login",   post(auth::login))
         .route("/auth/refresh", post(auth::refresh))
         .route("/tenants",      post(tenants::create_tenant))
+        .route("/tenants/:slug/users", post(users::register_user))
         .route("/graphify",     get(crate::handlers::graphify::graphify))
         .with_state(state)
 }
