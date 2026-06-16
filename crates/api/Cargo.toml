@@ -1,0 +1,23 @@
+[package]
+name = "valdhran-api"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+valdhran-domain       = { path = "../domain" }
+valdhran-application  = { path = "../application" }
+valdhran-infrastructure = { path = "../infrastructure" }
+
+axum          = { workspace = true }
+tokio         = { workspace = true }
+tower         = "0.4"
+tower-http    = { version = "0.6", features = ["cors", "trace"] }
+sqlx          = { workspace = true }
+serde         = { workspace = true }
+serde_json    = { workspace = true }
+uuid          = { workspace = true }
+chrono        = { workspace = true }
+tracing       = { workspace = true }
+tracing-subscriber = { workspace = true }
+async-trait   = "0.1"
+anyhow        = { workspace = true }

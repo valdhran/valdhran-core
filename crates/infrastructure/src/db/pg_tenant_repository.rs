@@ -9,6 +9,7 @@ use valdhran_domain::{
     value_objects::tenant_slug::TenantSlug,
 };
 
+#[derive(Clone)]
 pub struct PgTenantRepository {
     pool: PgPool,
 }
