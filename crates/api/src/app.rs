@@ -1,5 +1,5 @@
 use std::sync::Arc;
-use axum::{routing::post, Router};
+use axum::{routing::{get, post}, Router};
 use sqlx::PgPool;
 
 use valdhran_application::use_cases::{
@@ -34,6 +34,7 @@ pub fn create_router(state: AppState) -> Router {
         .route("/auth/login",   post(auth::login))
         .route("/auth/refresh", post(auth::refresh))
         .route("/tenants",      post(tenants::create_tenant))
+        .route("/graphify",     get(crate::handlers::graphify::graphify))
         .with_state(state)
 }
 

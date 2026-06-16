@@ -21,3 +21,5 @@ tracing       = { workspace = true }
 tracing-subscriber = { workspace = true }
 async-trait   = "0.1"
 anyhow        = { workspace = true }
+walkdir       = "2"
+toml          = "0.8"
