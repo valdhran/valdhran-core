@@ -1,36 +1,55 @@
-use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
+use std::sync::Arc;
 use sqlx::postgres::PgPoolOptions;
+use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt, EnvFilter};
+
 use valdhran_infrastructure::config::app_config::AppConfig;
 
-mod app;
+mod app_state;
 mod errors;
 mod handlers;
-mod middleware;
+mod router;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
+    // Cargar .env si existe (solo en desarrollo)
+    let _ = dotenvy::dotenv();
+
+    // Tracing
     tracing_subscriber::registry()
-        .with(tracing_subscriber::EnvFilter::new(
-            std::env::var("RUST_LOG").unwrap_or_else(|_| "valdhran_api=debug,tower_http=debug".into()),
-        ))
+        .with(EnvFilter::try_from_default_env().unwrap_or_else(|_| "info,valdhran=debug".into()))
         .with(tracing_subscriber::fmt::layer())
         .init();
 
+    // Configuración desde variables de entorno
     let config = AppConfig::load()?;
 
+    // Pool de conexiones PostgreSQL
     let pool = PgPoolOptions::new()
         .max_connections(config.database.max_connections)
         .connect(&config.database.url)
         .await?;
 
-    let state = app::build_state(pool, &config).await;
-    let router = app::create_router(state);
+    tracing::info!("Connected to PostgreSQL");
 
+    // Ejecutar migraciones al arrancar
+    sqlx::migrate!("../../migrations")
+        .run(&pool)
+        .await?;
+
+    tracing::info!("Migrations applied");
+
+    // Estado compartido
+    let state = Arc::new(app_state::AppState::new(pool, config.clone()));
+
+    // Router
+    let app = router::build_router(state);
+
+    // Servidor
     let addr = format!("{}:{}", config.server.host, config.server.port);
-    tracing::info!("valdhran-api escuchando en {}", addr);
-
     let listener = tokio::net::TcpListener::bind(&addr).await?;
-    axum::serve(listener, router).await?;
+    tracing::info!("Valdhran API listening on {}", addr);
+
+    axum::serve(listener, app).await?;
 
     Ok(())
 }

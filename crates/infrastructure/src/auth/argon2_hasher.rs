@@ -6,6 +6,7 @@ use async_trait::async_trait;
 use valdhran_application::use_cases::register_user::PasswordHasher as PasswordHasherPort;
 use valdhran_domain::errors::{DomainError, DomainResult};
 
+#[derive(Clone, Copy)]
 pub struct Argon2PasswordHasher;
 
 #[async_trait]

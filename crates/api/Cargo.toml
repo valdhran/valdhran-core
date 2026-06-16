@@ -2,24 +2,28 @@
 name = "valdhran-api"
 version.workspace = true
 edition.workspace = true
+authors.workspace = true
+
+[[bin]]
+name = "valdhran-api"
+path = "src/main.rs"
 
 [dependencies]
-valdhran-domain       = { path = "../domain" }
-valdhran-application  = { path = "../application" }
+# Workspace deps
+valdhran-domain        = { path = "../domain" }
+valdhran-application   = { path = "../application" }
 valdhran-infrastructure = { path = "../infrastructure" }
 
-axum          = { workspace = true }
-tokio         = { workspace = true }
-tower         = "0.4"
-tower-http    = { version = "0.6", features = ["cors", "trace"] }
-sqlx          = { workspace = true }
-serde         = { workspace = true }
-serde_json    = { workspace = true }
-uuid          = { workspace = true }
-chrono        = { workspace = true }
-tracing       = { workspace = true }
+tokio        = { workspace = true }
+axum         = { workspace = true }
+serde        = { workspace = true }
+serde_json   = { workspace = true }
+uuid         = { workspace = true }
+chrono       = { workspace = true }
+sqlx         = { workspace = true }
+tracing      = { workspace = true }
 tracing-subscriber = { workspace = true }
-async-trait   = "0.1"
-anyhow        = { workspace = true }
-walkdir       = "2"
-toml          = "0.8"
+anyhow       = { workspace = true }
+config       = { workspace = true }
+dotenvy      = { workspace = true }
+tower-http   = { version = "0.6", features = ["cors", "trace"] }
