@@ -69,6 +69,11 @@ impl JwtTokenService {
         Ok((user_id, tenant_id))
     }
 
+    /// Decode access token — expuesto para middleware de autenticación
+    pub fn decode_access_token(&self, token: &str) -> DomainResult<(Uuid, Uuid)> {
+        self.decode_token(token, "access")
+    }
+
     /// Hash SHA-256 del token para almacenar en BD (nunca el token en claro — DEC-006)
     pub fn hash_token(token: &str) -> String {
         let mut hasher = Sha256::new();

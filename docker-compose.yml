@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: valdhran-postgres
+    environment:
+      POSTGRES_USER: valdhran
+      POSTGRES_PASSWORD: valdhran_dev
+      POSTGRES_DB: valdhran
+    ports:
+      - "5432:5432"
+    volumes:
+      - valdhran_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U valdhran"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  valdhran_pgdata:

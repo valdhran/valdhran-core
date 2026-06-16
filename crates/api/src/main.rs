@@ -5,6 +5,7 @@ use valdhran_infrastructure::config::app_config::AppConfig;
 mod app;
 mod errors;
 mod handlers;
+mod middleware;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
